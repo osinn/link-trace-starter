@@ -31,8 +31,6 @@ trace:
   enabled: true
   task-execution:
     pool:
-      # 是否自动配置线程池
-      enabled: true
       # 以下参数是否Spring 线程池配置参数
       queue-capacity: 1000
       keep-alive-seconds: 300
@@ -47,22 +45,17 @@ trace:
     enabled-hystrix: true # 开启Hystrix，默认关闭，如果开启需要自行引入Hystrix相关依赖
 ```
 # 异步/多线程支持
-- 需要开启内置的线程池配置
+- 启动类上添加`@EnabledExecutor`注解，默认已启用异步，可配置线程池参数如下
 
 ```
 trace:
   task-execution:
     pool:
-      # 是否自动配置线程池
-      enabled: true
       # 以下参数是否Spring 线程池配置参数
       queue-capacity: 1000
       keep-alive-seconds: 300
       max-pool-size: 200
       core-pool-size: 50
-  scheduled:
-    # 开启定时任务traceId跟踪
-    enabled: true
 ```
 # 定时任务 traceId跟踪
 - 配置

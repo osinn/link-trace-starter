@@ -1,5 +1,5 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.gitee.osinn.link.trace.starter.LinkTraceAutoConfiguration,\
 com.gitee.osinn.link.trace.starter.TraceIdInterceptorConfig,\
-com.gitee.osinn.link.trace.starter.ThreadConfig,\
+com.gitee.osinn.link.trace.starter.TaskSchedulerConfig,\
 com.gitee.osinn.link.trace.starter.AspectAutoConfiguration

@@ -3,7 +3,6 @@ package com.gitee.osinn.link.trace.utils;
 import com.gitee.osinn.link.trace.constant.TraceConstant;
 import com.gitee.osinn.link.trace.service.ITraceService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
@@ -27,16 +26,20 @@ public class ThreadMdcUtil {
 
     public static String put() {
         String traceId = MDC.get(TraceConstant.TRACE_ID_MDC_FIELD);
-        if (StringUtils.isEmpty(traceId)) {
+        if (TraceStrUtils.isEmpty(traceId)) {
             traceId = iTraceService.generateTraceId();
         }
+        MDC.put(TraceConstant.TRACE_ID_MDC_FIELD, traceId);
+        return traceId;
+    }
+    public static String put(String traceId) {
         MDC.put(TraceConstant.TRACE_ID_MDC_FIELD, traceId);
         return traceId;
     }
 
     public static String put(HttpServletRequest request) {
         String traceId = request.getHeader(TraceConstant.TRACE_ID_MDC_FIELD);
-        if (StringUtils.isEmpty(traceId)) {
+        if (TraceStrUtils.isEmpty(traceId)) {
             traceId = iTraceService.generateTraceId();
         }
         MDC.put(TraceConstant.TRACE_ID_MDC_FIELD, traceId);
@@ -45,7 +48,7 @@ public class ThreadMdcUtil {
 
     public static String put(Map<String, Object> map) {
         String traceId = (String) map.get(TraceConstant.TRACE_ID_MDC_FIELD);
-        if (StringUtils.isEmpty(traceId)) {
+        if (TraceStrUtils.isEmpty(traceId)) {
             traceId = iTraceService.generateTraceId();
         }
         MDC.put(TraceConstant.TRACE_ID_MDC_FIELD, traceId);

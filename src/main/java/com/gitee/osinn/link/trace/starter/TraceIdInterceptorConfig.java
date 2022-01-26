@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Import;
  * @author wency_cai
  */
 @Configuration
-@Import(ThreadConfig.class)
+@Import(TaskSchedulerConfig.class)
 @ConditionalOnProperty(value = TraceProperties.PREFIX + TraceConstant.ENABLED, havingValue = "true")
 public class TraceIdInterceptorConfig {
 
