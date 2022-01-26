@@ -1,0 +1,9 @@
+# 线程池配置，解决异步执行，多线程丢失traceId
+trace:
+  task-execution:
+    pool:
+      enabled: true
+      queue-capacity: 1000
+      keep-alive-seconds: 300
+      max-pool-size: 200
+      core-pool-size: 50
