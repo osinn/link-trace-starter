@@ -43,8 +43,4 @@ public class TraceTaskExecutionProperties {
      */
     private String threadNamePrefix = "my-thread-";
 
-    /**
-     * 开启多线程支持traceId
-     */
-    private boolean enabled = true;
 }
