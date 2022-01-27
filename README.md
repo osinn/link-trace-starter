@@ -1,27 +1,36 @@
 # 介绍
-> link-trace-starter 意在实现线程、Spring Cloud 分布式链路跟踪
+> link-trace-starter 实现简易的线程、Spring Cloud 分布式链路跟踪，日志输出traceId
 
 # 支持
-- [x] 异步/多线程traceId跟踪
-- [x] Feign traceId跟踪
-- [x] Feign开启Hystrix traceId跟踪
-- [x] HttpClient traceId跟踪
-- [x] OKHttp traceId跟踪
-- [x] 定时任务 traceId跟踪
-- [x] 基于注解 traceId跟踪（在方法上添加@TraceIdAspect注解即可）
-
-### TODO
-- [ ] 消息中间件如MQ traceId跟踪
-
-> 无论哪种请求都是通过拦截器拦截将 traceId 塞到请求头中，接收方再从请求头获取traceId，如果 traceId 为空，则创建一个traceId值
+- [x] 异步/多线程traceId链路跟踪
+- [x] Feign traceId链路跟踪
+- [x] Feign开启Hystrix traceId链路跟踪
+- [x] HttpClient traceId链路跟踪
+- [x] OKHttp traceId链路跟踪
+- [x] RocketMQ traceId链路跟踪
+- [x] RabbitMQ traceId链路跟踪
+- [x] 定时任务 traceId链路跟踪
+- [x] 基于注解 traceId链路跟踪（在方法上添加@TraceIdAspect注解即可）
 
 # 使用
-- 引入依赖(未发布的maven中央仓库)
+- 引入依赖(未发布到maven中央仓库)
 ```
 <dependency>
     <groupId>com.gitee.osinn.framework</groupId>
     <artifactId>link-trace-starter</artifactId>
     <version>最新版本</version>
+</dependency>
+# RocketMQ 测试版本
+<dependency>
+    <groupId>org.apache.rocketmq</groupId>
+    <artifactId>rocketmq-spring-boot-starter</artifactId>
+    <version>2.2.1</version>
+</dependency>
+# RabbitMQ 测试版本
+<dependency>
+<groupId>org.springframework.boot</groupId>
+<artifactId>spring-boot-starter-amqp</artifactId>
+<version>2.4.2</version>
 </dependency>
 ```
 # 配置
@@ -37,12 +46,16 @@ trace:
       max-pool-size: 200
       core-pool-size: 50
   scheduled:
-    # 开启定时任务traceId跟踪
+    # 开启定时任务traceId链路跟踪
     enabled: true
   # Spring cloud Feign、Hystrix链路跟踪自动配置
   cloud:
     enabled-feign: true # 开启Feign，默认关闭，如果开启需要自行引入Feign相关依赖
     enabled-hystrix: true # 开启Hystrix，默认关闭，如果开启需要自行引入Hystrix相关依赖
+  # 开启RocketMQ链路跟踪
+  enabled-rocket-mq: true
+  # 开启RabbitMQ链路跟踪
+  enabled-rabbitmq: true
 ```
 # 异步/多线程支持
 - 启动类上添加`@EnabledExecutor`注解，默认已启用异步，可配置线程池参数如下
@@ -149,7 +162,6 @@ public class OkHttpUtil {
     }
 }
 ```
-
 # 自定义`traceId`值
 - 继承`ITraceService`接口，并注入实现bean，示例如下
 
@@ -163,4 +175,24 @@ public class TraceServiceImpl implements ITraceService {
         return traceId;
     }
 }
+```
+# FAQ
+- RocketMQ 发送消息回调方式发送队列消息会丢失traceId,原因是发送消息时获取不到traceId值,解决方案如下
+```
+// 需要发送的消息
+Message<?> msg = MessageBuilder.withPayload("测试链路跟踪")
+        // 手动往消息头中添加traceId
+        .setHeader(TraceConstant.TRACE_ID_MDC_FIELD, ThreadMdcUtil.getTraceId())
+        .build();
+// 发送消息
+rocketMQTemplate.asyncSend("springboot-topic", msg, new SendCallback() {
+    @Override
+    public void onSuccess(SendResult sendResult) {
+        //发送成功
+    }
+    @Override
+    public void onException(Throwable throwable) {
+        //发送失败
+    }
+});
 ```

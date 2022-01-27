@@ -2,6 +2,7 @@ package com.gitee.osinn.link.trace.starter;
 
 import com.gitee.osinn.link.trace.TraceProperties;
 import com.gitee.osinn.link.trace.constant.TraceConstant;
+import com.gitee.osinn.link.trace.mq.RocketMqTrace;
 import com.gitee.osinn.link.trace.service.impl.TraceServiceImpl;
 import com.gitee.osinn.link.trace.utils.ThreadMdcUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -32,5 +33,10 @@ public class LinkTraceAutoConfiguration {
         return new TraceServiceImpl();
     }
 
+    @Bean
+    @ConditionalOnProperty(prefix = TraceProperties.PREFIX, value = TraceConstant.ENABLED_ROCKETMQ, matchIfMissing = true)
+    public RocketMqTrace rocketMqTrace() {
+        return new RocketMqTrace();
+    }
 
 }
