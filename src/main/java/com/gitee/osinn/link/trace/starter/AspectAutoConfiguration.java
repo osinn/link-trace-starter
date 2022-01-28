@@ -24,8 +24,6 @@ public class AspectAutoConfiguration {
 
     /**
      * scheduled 定时任务 AOP 自动配置
-     *
-     * @return
      */
     @Bean
     @ConditionalOnProperty(prefix = "trace.scheduled", value = "enabled", matchIfMissing = true)
@@ -35,10 +33,9 @@ public class AspectAutoConfiguration {
 
     /**
      * 基于 @TraceIdAspect 注解 AOP 自动配置
-     *
-     * @return
      */
     @Bean
+    @ConditionalOnProperty(prefix = TraceProperties.PREFIX, value = TraceConstant.INJECTION_AOP, matchIfMissing = true)
     public HandlerTraceIdAspect handlerTraceIdAspect() {
         return new HandlerTraceIdAspect();
     }

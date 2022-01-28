@@ -22,12 +22,17 @@ public class TraceProperties {
     /**
      * 开启RabbitMQ链路跟踪
      */
-    private boolean enabledRabbitmq = false;
+    private boolean enabledRabbitmq;
 
     /**
      * 开启RocketMQ链路跟踪
      */
-    private boolean enabledRocketmq = false;
+    private boolean enabledRocketmq;
+
+    /**
+     * 注入HandlerTraceIdAspect后可以在方法上使用@HandlerTraceIdAspect注解实现traceId链路跟踪
+     */
+    private boolean injectionAop;
 
     /**
      * 微服务链路跟踪

@@ -15,6 +15,7 @@ public final class TraceConstant {
     public static final String ENABLED = ".enabled";
 
     public static final String ENABLED_RABBITMQ = ".enabled-rabbitmq";
-    public static final String ENABLED_ROCKETMQ = ".enabled-rocketmq";
+    public static final String ENABLED_ROCKETMQ = "enabled-rocketmq";
+    public static final String INJECTION_AOP = "injection-aop";
 
 }

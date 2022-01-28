@@ -13,12 +13,12 @@
 - [x] 基于注解 traceId链路跟踪（在方法上添加@TraceIdAspect注解即可）
 
 # 使用
-- 引入依赖(未发布到maven中央仓库)
+- 引入依赖
 ```
 <dependency>
     <groupId>com.gitee.osinn.framework</groupId>
     <artifactId>link-trace-starter</artifactId>
-    <version>最新版本</version>
+    <version>1.0</version>
 </dependency>
 # RocketMQ 测试版本
 <dependency>
@@ -56,6 +56,8 @@ trace:
   enabled-rocket-mq: true
   # 开启RabbitMQ链路跟踪
   enabled-rabbitmq: true
+  # 表示注入HandlerTraceIdAspect，之后可以在方法上使用@HandlerTraceIdAspect注解实现traceId链路跟踪
+  injection-aop: true
 ```
 # 异步/多线程支持
 - 启动类上添加`@EnabledExecutor`注解，默认已启用异步，可配置线程池参数如下
