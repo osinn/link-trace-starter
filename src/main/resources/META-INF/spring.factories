@@ -1,6 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.gitee.osinn.link.trace.starter.LinkTraceAutoConfiguration,\
-com.gitee.osinn.link.trace.starter.TraceIdInterceptorConfig,\
-com.gitee.osinn.link.trace.starter.TaskSchedulerConfig,\
-com.gitee.osinn.link.trace.starter.AspectAutoConfiguration,\
-com.gitee.osinn.link.trace.starter.RabbitmqTraceAutoConfig
+io.github.osinn.link.trace.starter.LinkTraceAutoConfiguration,\
+io.github.osinn.link.trace.starter.TraceIdInterceptorConfig,\
+io.github.osinn.link.trace.starter.TaskSchedulerConfig,\
+io.github.osinn.link.trace.starter.AspectAutoConfiguration,\
+io.github.osinn.link.trace.starter.RabbitmqTraceAutoConfig

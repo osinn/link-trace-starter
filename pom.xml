@@ -5,7 +5,7 @@
 
     <groupId>com.gitee.osinn</groupId>
     <artifactId>link-trace-starter</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <name>link-trace-starter</name>
     <description>link-trace-starter</description>
     <url>https://gitee.com/osinn/link-trace-starter</url>
@@ -13,14 +13,14 @@
     <developers>
         <developer>
             <name>java客栈的小二</name>
-            <email>935415486@qq.com</email>
+            <email>javawency@163.com</email>
         </developer>
     </developers>
 
     <scm>
-        <connection>scm:git:git@gitee.com:osinn/link-trace-starter.git</connection>
-        <developerConnection>scm:git:git@gitee.com:osinn/link-trace-starter.git</developerConnection>
-        <url>git@gitee.com:osinn/link-trace-starter.git</url>
+        <connection>scm:git:git@github.com:osinn/link-trace-starter.git</connection>
+        <developerConnection>scm:git:git@github.com:osinn/link-trace-starter.git</developerConnection>
+        <url>git@github.com:osinn/link-trace-starter.git</url>
     </scm>
 
     <profiles>
@@ -70,11 +70,15 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <!-- aop -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
+            <scope>compile</scope>
+            <optional>true</optional>
         </dependency>
         <!-- 添加springboot对amqp的支持 -->
         <dependency>
